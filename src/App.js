@@ -1,18 +1,13 @@
 import React, { Component } from 'react';
-import { Input, Menu } from 'semantic-ui-react'
+import { Container, Input, Menu } from 'semantic-ui-react'
 import {
   BrowserRouter as Router,
   Route,
   Link
 } from 'react-router-dom'
+import NewsList from './modules/news/NewsList'
 import logo from './logo.svg';
 import './App.css';
-
-const Home = () => (
-  <div>
-    <h2>Home</h2>
-  </div>
-)
 
 const About = () => (
   <div>
@@ -64,17 +59,31 @@ class App extends Component {
 
     return (
       <Router>
-        <div>
-          <Menu inverted>
-            <Menu.Item name="home" as={Link} to="/" active={activeItem === 'home'} onClick={this.handleItemClick} />
-            <Menu.Item name="about" as={Link} to="/about" active={activeItem === 'about'} onClick={this.handleItemClick} />
-            <Menu.Item name="topics" as={Link} to="/topics" active={activeItem === 'topics'} onClick={this.handleItemClick} />
+        <Container>
+          <Menu inverted stackable>
+            <Menu.Item>
+              <img src={logo} className="App-logo" alt="logo" style={{ width: 30, height: 20 }}/>
+            </Menu.Item>
+            <Menu.Item name="home" as={Link} to="/" active={activeItem === 'home'} onClick={this.handleItemClick}>
+              Home
+            </Menu.Item>
+            <Menu.Item name="about" as={Link} to="/about" active={activeItem === 'about'} onClick={this.handleItemClick}>
+              About
+            </Menu.Item>
+            <Menu.Item name="topics" as={Link} to="/topics" active={activeItem === 'topics'} onClick={this.handleItemClick}>
+              Topics
+            </Menu.Item>
+            <Menu.Menu position='right'>
+              <Menu.Item>
+                <Input icon='search' placeholder='Search...' />
+              </Menu.Item>
+            </Menu.Menu>
           </Menu>
 
-          <Route exact path="/" component={Home}/>
+          <Route exact path="/" component={NewsList}/>
           <Route path="/about" component={About}/>
           <Route path="/topics" component={Topics}/>
-        </div>
+        </Container>
       </Router>
     );
   }
