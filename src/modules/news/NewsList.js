@@ -58,6 +58,13 @@ class NewsList extends React.PureComponent {
            </Dimmer>
 
            <Image src='https://react.semantic-ui.com/assets/images/wireframe/short-paragraph.png' />
+           <Image src='https://react.semantic-ui.com/assets/images/wireframe/short-paragraph.png' />
+           <Image src='https://react.semantic-ui.com/assets/images/wireframe/short-paragraph.png' />
+           <Image src='https://react.semantic-ui.com/assets/images/wireframe/short-paragraph.png' />
+           <Image src='https://react.semantic-ui.com/assets/images/wireframe/short-paragraph.png' />
+           <Image src='https://react.semantic-ui.com/assets/images/wireframe/short-paragraph.png' />
+           <Image src='https://react.semantic-ui.com/assets/images/wireframe/short-paragraph.png' />
+           <Image src='https://react.semantic-ui.com/assets/images/wireframe/short-paragraph.png' />
          </Segment>
       )
     } else if (data && data.length > 0) {
