@@ -38,8 +38,9 @@ class NewsList extends React.PureComponent {
       (this.state.data.length && this.state.currentPage !== this.state.count) &&
       !this.state.fetching
     ) {
+      let nextPage = this.state.currentPage + 1
       this.setState({
-          currentPage: this.state.currentPage + 1,
+          currentPage: nextPage,
           fetching: true,
         })
 
@@ -48,7 +49,7 @@ class NewsList extends React.PureComponent {
           page = 2
           this.setState({ currentPage: 2, fetching: true })
         } else {
-          page = this.state.currentPage + 1
+          page = nextPage
         }
         try {
           let data = [...this.state.data]
@@ -66,7 +67,6 @@ class NewsList extends React.PureComponent {
             result.data.articles.forEach((item, index) => data.push(item))
             this.setState({
               data,
-              currentPage: page,
               fetching: false
             })
           }

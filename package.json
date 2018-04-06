@@ -17,12 +17,12 @@
   "now": {
     "alias": "xcidic.news",
     "NODE_ENV": "production"
-  }
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "deploy": "now -e REACT_APP_NEWS_API_KEY=a6ff111546c0411f9228e774270964e3 --public mimber
+    "deploy": "now -e REACT_APP_NEWS_API_KEY=a6ff111546c0411f9228e774270964e3 --public"
   }
 }
