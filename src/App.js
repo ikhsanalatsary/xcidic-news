@@ -6,6 +6,7 @@ import {
   Link
 } from 'react-router-dom'
 import NewsList from './modules/news/NewsList'
+import SourceList from './modules/news/SourceList'
 import logo from './logo.svg';
 import './App.css';
 
@@ -56,7 +57,6 @@ class App extends Component {
 
   render() {
     const { activeItem } = this.state
-
     return (
       <Router>
         <Container>
@@ -80,7 +80,8 @@ class App extends Component {
             </Menu.Menu>
           </Menu>
 
-          <Route exact path="/" component={NewsList}/>
+          <Route exact path="/" component={SourceList}/>
+          <Route path="/source/:sourceId" component={NewsList}/>
           <Route path="/about" component={About}/>
           <Route path="/topics" component={Topics}/>
         </Container>
