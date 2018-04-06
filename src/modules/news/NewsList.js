@@ -33,7 +33,7 @@ class NewsList extends React.PureComponent {
 
   onScroll = async () => {
     if (
-      window.screen.width < 769 &&
+      window.screen.width < 768 &&
       (window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 500) &&
       (this.state.data.length && this.state.currentPage !== this.state.count) &&
       !this.state.fetching
