@@ -4,8 +4,10 @@ import API from '../../utils/api'
 import NewsItem from './components/NewsItem'
 
 const api = API.create();
+const CancelToken = API.CancelToken;
 
 class NewsList extends React.PureComponent {
+  cancel = null
   state = {
     loading: true,
     count: 0,
@@ -18,13 +20,25 @@ class NewsList extends React.PureComponent {
     this.fetchData()
   }
 
+  componentWillUnmount() {
+    if (this.cancel) {
+      this.cancel('Operation canceled by the user.')
+    }
+    console.log('unmount');
+  }
+
   articleList = (article, i) => <NewsItem article={article} key={i} />
 
   fetchData = (page = 1) => {
     api.getEverything({
-      sources: 'bbc-news, the-verge',
+      sources: this.props.match.params.sourceId,
       sortBy: 'publishedAt',
       page,
+    }, {
+      cancelToken: new CancelToken(c => {
+        // An executor function receives a cancel function as a parameter
+        this.cancel = c;
+      })
     })
     .then(result => {
       this.setState({
@@ -83,15 +97,15 @@ class NewsList extends React.PureComponent {
     return (
       <React.Fragment>
         {content}
-      <Grid stackable>
-        <Grid.Column width={5}>
-          <Pagination
-            activePage={activePage}
-            onPageChange={this.handlePaginationChange}
-            totalPages={count}
-          />
-        </Grid.Column>
-      </Grid>
+        <Grid stackable>
+          <Grid.Column width={5}>
+            <Pagination
+              activePage={activePage}
+              onPageChange={this.handlePaginationChange}
+              totalPages={count}
+            />
+          </Grid.Column>
+        </Grid>
       </React.Fragment>
     );
   }

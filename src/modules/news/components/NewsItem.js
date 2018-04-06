@@ -3,12 +3,25 @@ import moment from 'moment';
 import isUrl from 'is-url';
 import { Card, Icon, Image } from 'semantic-ui-react'
 
-export default class NewsItem extends React.PureComponent{
+export default class NewsItem extends React.PureComponent {
+  state = {
+    color: ''
+  }
+
+  defaultImage = 'https://react.semantic-ui.com/assets/images/wireframe/image.png'
+
+  onErrorImage = e => e.target.src = this.defaultImage
+
+  onMouseEnter = e => this.setState({ color: 'blue' })
+
+  onMouseLeave = e => this.setState({ color: '' })
+
   render() {
     const { article } = this.props;
+    let otherProps = this.state.color ? { color: this.state.color } : null
     return (
-      <Card>
-        <Image src={article.urlToImage} />
+      <Card link onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave} href={article.url} target="_blank" rel="noopener noreferrer" {...otherProps}>
+        <Image src={article.urlToImage || this.defaultImage} onError={this.onErrorImage} />
         <Card.Content>
           <Card.Header>
             {article.title}
@@ -23,10 +36,8 @@ export default class NewsItem extends React.PureComponent{
           </Card.Description>
         </Card.Content>
         <Card.Content extra>
-          <a>
-            <Icon name='user' />
-            {isUrl(article.author) || article.author === null ? 'Idem' : article.author}
-          </a>
+          <Icon name='user' />
+          {isUrl(article.author) || article.author === null ? 'Idem' : article.author}
         </Card.Content>
       </Card>
     )
