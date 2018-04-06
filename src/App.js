@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Input, Menu } from 'semantic-ui-react'
+import { Container } from 'semantic-ui-react'
 import {
   BrowserRouter as Router,
   Route,
@@ -7,8 +7,7 @@ import {
 } from 'react-router-dom'
 import NewsList from './modules/news/NewsList'
 import SourceList from './modules/news/SourceList'
-import logo from './logo.svg';
-import './App.css';
+import Menu from './modules/menus'
 
 const About = () => (
   <div>
@@ -51,34 +50,11 @@ const Topics = ({ match }) => (
 )
 
 class App extends Component {
-  state = { activeItem: 'home' }
-
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
-
   render() {
-    const { activeItem } = this.state
     return (
       <Router>
         <Container>
-          <Menu inverted stackable>
-            <Menu.Item>
-              <img src={logo} className="App-logo" alt="logo" style={{ width: 30, height: 20 }}/>
-            </Menu.Item>
-            <Menu.Item name="home" as={Link} to="/" active={activeItem === 'home'} onClick={this.handleItemClick}>
-              Home
-            </Menu.Item>
-            <Menu.Item name="about" as={Link} to="/about" active={activeItem === 'about'} onClick={this.handleItemClick}>
-              About
-            </Menu.Item>
-            <Menu.Item name="topics" as={Link} to="/topics" active={activeItem === 'topics'} onClick={this.handleItemClick}>
-              Topics
-            </Menu.Item>
-            <Menu.Menu position='right'>
-              <Menu.Item>
-                <Input icon='search' placeholder='Search...' />
-              </Menu.Item>
-            </Menu.Menu>
-          </Menu>
+          <Menu />
 
           <Route exact path="/" component={SourceList}/>
           <Route path="/source/:sourceId" component={NewsList}/>
