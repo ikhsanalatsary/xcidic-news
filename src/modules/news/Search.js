@@ -69,7 +69,6 @@ class Search extends React.PureComponent {
           page = nextPage
         }
         try {
-          const search = qs.parse(this.props.location.search)
           let data = [...this.state.data]
           const result = await api.getEverything({
             q: this.state.q,

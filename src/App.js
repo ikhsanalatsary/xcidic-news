@@ -14,6 +14,7 @@ import Menu from './modules/menus'
 const About = () => (
   <div>
     <h2>About</h2>
+    <p>Resource: <a href="https://newsapi.org">newsapi.org</a></p>
   </div>
 )
 
