@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, Dimmer, Image, Loader, Pagination, Responsive, Segment } from 'semantic-ui-react'
 import API from '../../utils/api'
 import NewsItem from './components/NewsItem'
+import paragraph from './paragraph.png'
 
 const api = API.create();
 const CancelToken = API.CancelToken;
@@ -121,15 +122,15 @@ class NewsList extends React.PureComponent {
            <Dimmer active inverted>
              <Loader inverted>Loading</Loader>
            </Dimmer>
-
-           <Image src='https://react.semantic-ui.com/assets/images/wireframe/short-paragraph.png' />
-           <Image src='https://react.semantic-ui.com/assets/images/wireframe/short-paragraph.png' />
-           <Image src='https://react.semantic-ui.com/assets/images/wireframe/short-paragraph.png' />
-           <Image src='https://react.semantic-ui.com/assets/images/wireframe/short-paragraph.png' />
-           <Image src='https://react.semantic-ui.com/assets/images/wireframe/short-paragraph.png' />
-           <Image src='https://react.semantic-ui.com/assets/images/wireframe/short-paragraph.png' />
-           <Image src='https://react.semantic-ui.com/assets/images/wireframe/short-paragraph.png' />
-           <Image src='https://react.semantic-ui.com/assets/images/wireframe/short-paragraph.png' />
+           <p>
+             <Image src={paragraph} />
+           </p>
+           <p>
+             <Image src={paragraph} />
+           </p>
+           <p>
+             <Image src={paragraph} />
+           </p>
          </Segment>
       )
     } else if (data && data.length > 0) {
@@ -157,6 +158,7 @@ class NewsList extends React.PureComponent {
           onPageChange={this.handlePaginationChange}
           totalPages={count}
           minWidth={768}
+          style={{marginBottom: 15}}
         />
         {fetching && <Loader active inline='centered' />}
       </React.Fragment>

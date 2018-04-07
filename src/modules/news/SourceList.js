@@ -1,7 +1,10 @@
 import React from 'react';
 import { Card, Dimmer, Image, Input, Loader, Segment } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
+
 import { BASE_ICON_URL } from '../../utils/config'
+import defaultImage from './image.png'
+import paragraph from './paragraph.png'
 
 class SourceList extends React.PureComponent {
   state = {
@@ -19,7 +22,7 @@ class SourceList extends React.PureComponent {
       .catch(err => this.setState({ loading: false, error: err.message }))
   }
 
-  onErrorImage = e => e.target.src = 'https://react.semantic-ui.com/assets/images/wireframe/image.png'
+  onErrorImage = e => e.target.src = defaultImage
 
   sourceItem = (source, i) => {
     const src = `${BASE_ICON_URL}?url=${source.url}&size=70..120..200`
@@ -54,14 +57,15 @@ class SourceList extends React.PureComponent {
              <Loader inverted>Loading</Loader>
            </Dimmer>
 
-           <Image src='https://react.semantic-ui.com/assets/images/wireframe/short-paragraph.png' />
-           <Image src='https://react.semantic-ui.com/assets/images/wireframe/short-paragraph.png' />
-           <Image src='https://react.semantic-ui.com/assets/images/wireframe/short-paragraph.png' />
-           <Image src='https://react.semantic-ui.com/assets/images/wireframe/short-paragraph.png' />
-           <Image src='https://react.semantic-ui.com/assets/images/wireframe/short-paragraph.png' />
-           <Image src='https://react.semantic-ui.com/assets/images/wireframe/short-paragraph.png' />
-           <Image src='https://react.semantic-ui.com/assets/images/wireframe/short-paragraph.png' />
-           <Image src='https://react.semantic-ui.com/assets/images/wireframe/short-paragraph.png' />
+           <p>
+             <Image src={paragraph} />
+           </p>
+           <p>
+             <Image src={paragraph} />
+           </p>
+           <p>
+             <Image src={paragraph} />
+           </p>
          </Segment>
       )
     } else if (data && data.length > 0) {
