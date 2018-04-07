@@ -13,10 +13,31 @@ const MenuItem = ({ name, to, activeOnlyWhenExact }) => (
     )}
   />
 );
+const RightMenu = ({ name, to, activeOnlyWhenExact }) => (
+  <Route
+    path={to}
+    exact={activeOnlyWhenExact}
+    children={({ match, history }) => (
+      <Menu.Menu position='right'>
+        <Menu.Item>
+          <Input icon='search' placeholder='Search...' onKeyPress={keyPress(history)} />
+        </Menu.Item>
+      </Menu.Menu>
+    )}
+  />
+);
+const keyPress = history => e => {
+  if (e.charCode === 13 && e.target.value.length > 0) {
+    let encodeUri = encodeURIComponent(e.target.value);
+    history.push('/search/?q=' + encodeUri);
+    e.target.value = '';
+  } else {
+    e.target.focus();
+  }
+}
 
 export default class Menus extends Component {
   render() {
-    let isHomePage =  window.location.pathname === '/'
     return (
       <Menu inverted stackable>
         <Menu.Item>
@@ -25,11 +46,7 @@ export default class Menus extends Component {
         <MenuItem name="home" to="/" activeOnlyWhenExact />
         <MenuItem name="about" to="/about" />
         <MenuItem name="topics" to="/topics" />
-        {!isHomePage && <Menu.Menu position='right'>
-          <Menu.Item>
-            <Input icon='search' placeholder='Search...' />
-          </Menu.Item>
-        </Menu.Menu>}
+        <RightMenu />
       </Menu>
     )
   }

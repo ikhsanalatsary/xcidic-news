@@ -3,10 +3,12 @@ import { Container } from 'semantic-ui-react'
 import {
   BrowserRouter as Router,
   Route,
-  Link
+  Link,
+  Switch
 } from 'react-router-dom'
 import NewsList from './modules/news/NewsList'
 import SourceList from './modules/news/SourceList'
+import Search from './modules/news/Search'
 import Menu from './modules/menus'
 
 const About = () => (
@@ -55,11 +57,13 @@ class App extends Component {
       <Router>
         <Container>
           <Menu />
-
-          <Route exact path="/" component={SourceList}/>
-          <Route path="/source/:sourceId" component={NewsList}/>
-          <Route path="/about" component={About}/>
-          <Route path="/topics" component={Topics}/>
+          <Switch>
+            <Route exact path="/" component={SourceList}/>
+            <Route path="/source/:sourceId" component={NewsList}/>
+            <Route path="/search" component={Search}/>
+            <Route path="/about" component={About}/>
+            <Route path="/topics" component={Topics}/>
+          </Switch>
         </Container>
       </Router>
     );
