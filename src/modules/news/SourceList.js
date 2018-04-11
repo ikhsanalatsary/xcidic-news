@@ -1,10 +1,12 @@
-import React from 'react';
+import React from 'react'
 import { Card, Dimmer, Image, Input, Loader, Segment } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
 import { BASE_ICON_URL } from '../../utils/config'
 import defaultImage from './image.png'
 import paragraph from './paragraph.png'
+
+const storageName = '__Xcidic_News_Source__'
 
 class SourceList extends React.PureComponent {
   state = {
@@ -15,12 +17,26 @@ class SourceList extends React.PureComponent {
   }
 
   componentDidMount() {
-    import('../../utils/api')
-      .then(({ default: api }) => api.create())
-      .then(api => api.getSources({}))
-      .then(result => this.setState({ loading: false, data: result.data.sources }))
-      .catch(err => this.setState({ loading: false, error: err.message }))
+    if (window.localStorage.getItem(storageName)) {
+      try {
+        const data = JSON.parse(window.localStorage.getItem(storageName))
+        this.updateOurState({ loading: false, data })
+      } catch (e) {
+        this.updateOurState({ loading: false, error: e.message })
+      }
+    } else {
+      import('../../utils/api')
+        .then(({ default: api }) => api.create())
+        .then(api => api.getSources({}))
+        .then(result => {
+          this.updateOurState({ loading: false, data: result.data.sources })
+          window.localStorage.setItem(storageName, JSON.stringify(result.data.sources))
+        })
+        .catch(err => this.updateOurState({ loading: false, error: err.message }))
+    }
   }
+
+  updateOurState = (obj) => this.setState(obj)
 
   onErrorImage = e => e.target.src = defaultImage
 
@@ -48,8 +64,8 @@ class SourceList extends React.PureComponent {
   }
 
   render() {
-    const { loading, error, data } = this.state;
-    let content = null;
+    const { loading, error, data } = this.state
+    let content = null
     if (loading) {
       content = (
         <Segment>
@@ -90,4 +106,4 @@ class SourceList extends React.PureComponent {
   }
 }
 
-export default SourceList;
+export default SourceList
